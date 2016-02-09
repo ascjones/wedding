@@ -1,10 +1,16 @@
 #!/bin/bash
 
-rm -f london.html
-cp index-template.html london.html
+generate () {
+  town=$1
+  rm -f $town.html
+  cp index-template.html $town.html
 
-for file in vars/london/*
-do
-  name=${file##*/}
-  sed -i -e "/{{ $name }}/ r $file" -e "s/{{ $name }}//" london.html
-done 
+  for file in vars/$town/*
+  do
+    name=${file##*/}
+    sed -i -e "/{{ $name }}/ r $file" -e "s/{{ $name }}//" $town.html
+  done
+}
+
+generate "london"
+generate "capetown"
