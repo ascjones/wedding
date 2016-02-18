@@ -336,10 +336,11 @@ $(document).ready(function() {
 	// 07. COUNTDOWN
 	//===================================================================================
 	var theday = new Date();
-	if (location.pathname.indexOf('capetown')) {
+	console.log(location.pathname);
+	if (location.pathname.contains('capetown')) {
 		theday = new Date(2016, 5, 21);
 	} else {
-		theday = new Date(2016, 5, 27); 
+		theday = new Date(2016, 5, 27);
 	}
 	$('#countdown').countdown({until: theday, format: 'WDHMS'});
 	$('#countdown').countdown($.countdown.regionalOptions['custom-label']);
