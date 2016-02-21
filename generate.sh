@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo CURRENT DIR: $(pwd)
+
 generate () {
   town=$1
   rm -f $town.html
