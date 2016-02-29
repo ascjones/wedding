@@ -11,7 +11,8 @@ generate () {
   for file in ./vars/$town/*
   do
     name=${file##*/}
-    sed -i -e "/{{ $name }}/ r $file" -e "s/{{ $name }}//" $town.html
+    sed -i.bak -e "/{{ $name }}/ r $file" -e "s/{{ $name }}//" $town.html
+    rm $town.html.bak
   done
 }
 
