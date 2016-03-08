@@ -70,8 +70,8 @@
        		raiseOnDrag: false,
        		icon: ' ',
        		map: map,
-         	labelContent: '<div class="de-icon circle medium-size" style="background-color:#FFF"><i class="de-icon-drink"></i></div>',
-       		labelAnchor: new google.maps.Point(0, 0),
+         	labelContent: '<div class="de-icon circle medium-size" style="background-color:#FFF"; border:1px solid cyan><i class="de-icon-glass" style="color:cyan"></i></div>',
+       		labelAnchor: new google.maps.Point(29, 29),
        		labelClass: "labels" // the CSS class for the label
      		});
 		//
@@ -135,11 +135,14 @@
 		//INFO WINDOWS
 		//=======================================================================================
 		var contentString = '<div>'+
-		'WEDDING CEREMONY';
+		'<h5>CEREMONY</h5>' +
+		"St. Mary's of the Angels <br/>" +
+		'Athlone, Cape Town' +
       	'</div>';
 
 		var contentString1 = '<div>'+
-		'WEDDING PARTY';
+		'<h5>RECEPTION</h5>'+
+		'Forest 44 <br/> Stellenbosch'
       	'</div>';
 
  	 	var infowindow = new google.maps.InfoWindow({
@@ -155,12 +158,17 @@
 		//OPEN INFO WINDOWS ON LOAD
 		//=======================================================================================
   		infowindow.open(map,marker1);
-  		infowindow1.open(map,marker2);
 
 		//ON CLICK MARKER, OPEN INFO WINDOWS
 		//=======================================================================================
 		google.maps.event.addListener(marker1, 'click', function() {
+   	 		map.setZoom(14);
+    		map.setCenter(marker1.getPosition());
   			infowindow.open(map,marker1);
+  		});
+
+		google.maps.event.addListener(marker2, 'click', function() {
+  			infowindow.open(map,marker2);
   		});
 
 		//ON MARKER CLICK EVENTS
@@ -323,11 +331,13 @@
 		//INFO WINDOWS
 		//=======================================================================================
 		var contentString = '<div>'+
-		'WEDDING CEREMONY';
+		'<h5>CEREMONY</h5>' +
+		'Pembroke Lodge <br/>' +
+		'Richmond, London' +
       	'</div>';
 
 		var contentString1 = '<div>'+
-		'WEDDING PARTY';
+		'RECEPTION';
       	'</div>';
 
  	 	var infowindow = new google.maps.InfoWindow({
@@ -347,7 +357,13 @@
 		//ON CLICK MARKER, OPEN INFO WINDOWS
 		//=======================================================================================
 		google.maps.event.addListener(marker1, 'click', function() {
+   	 		map.setZoom(14);
+    		map.setCenter(marker1.getPosition());
   			infowindow.open(map,marker1);
+  		});
+
+		google.maps.event.addListener(marker2, 'click', function() {
+  			infowindow.open(map,marker2);
   		});
 
 		//ON MARKER CLICK EVENTS
