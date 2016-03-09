@@ -205,14 +205,14 @@
 		});
 	}
 
-	function initializeLondon() {
+function initializeLondon() {
 
 		//DEFINE MAP OPTIONS
 		//=======================================================================================
   		var mapOptions = {
     		zoom: 18,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
-    		center: new google.maps.LatLng(-33.9320338, 18.55318),
+  		center: new google.maps.LatLng(51.442695, -0.294428),
 			panControl: true,
   			zoomControl: true,
   			mapTypeControl: true,
@@ -250,7 +250,7 @@
 		//ADD NEW MARKER WITH LABEL
 		//=======================================================================================
 		var marker1 = new MarkerWithLabel({
-       		position: new google.maps.LatLng(-12.046014, -77.030503),
+       		position: new google.maps.LatLng(51.442695, -0.294428),
        		draggable: false,
        		raiseOnDrag: false,
        		icon: ' ',
@@ -401,8 +401,8 @@
 	}
 
 	// LOAD GMAP
-	if (location.pathname.contains('capetown')) {
+	if (location.pathname.indexOf('capetown')) {
 		google.maps.event.addDomListener(window, 'load', initializeCapeTown);
 	} else {
-		google.maps.event.addDomListener(window, 'load', initializeCapeTown);
+		google.maps.event.addDomListener(window, 'load', initializeLondon);
 	}
