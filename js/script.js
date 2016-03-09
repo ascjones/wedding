@@ -337,7 +337,7 @@ $(document).ready(function() {
 	//===================================================================================
 	var theday = new Date();
 	console.log(location.pathname);
-	if (location.pathname.indexOf('capetown')) {
+	if (location.pathname.indexOf('capetown') > -1) {
 		theday = new Date(2016, 5, 21);
 	} else {
 		theday = new Date(2016, 5, 27);
