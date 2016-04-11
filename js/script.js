@@ -338,9 +338,9 @@ $(document).ready(function() {
 	var theday = new Date();
 	console.log(location.pathname);
 	if (location.pathname.indexOf('capetown') > -1) {
-		theday = new Date(2016, 5, 21);
+		theday = new Date(2016, 4, 21, 12, 30);
 	} else {
-		theday = new Date(2016, 5, 27);
+		theday = new Date(2016, 4, 27, 15, 0);
 	}
 	$('#countdown').countdown({until: theday, format: 'WDHMS'});
 	$('#countdown').countdown($.countdown.regionalOptions['custom-label']);
