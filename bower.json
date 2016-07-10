@@ -1,0 +1,22 @@
+{
+  "name": "wedding",
+  "homepage": "https://github.com/ascjones/wedding",
+  "authors": [
+    "Andrew Jones <ascjones@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "photoswipe": "~4.1.1"
+  }
+}
