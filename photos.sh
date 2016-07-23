@@ -44,5 +44,6 @@ case "$1" in
         -e "s~{{ img-author }}~$AUTHOR~g" photo-template.html \
         -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
     done
+      # sed -e 's~{{ images }}~'"$images"'~g' <gallery-template.html >gallery.html
     ;;
 esac
