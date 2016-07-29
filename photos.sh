@@ -2,8 +2,12 @@
 
 PHOTOS_DIR=photos/london
 AUTHOR=todo
+
 THUMBS_DIR=${PHOTOS_DIR}/thumbs
 MEDIUM_DIR=${PHOTOS_DIR}/medium
+
+THUMB_SIZE=300x200
+MEDIUM_SIZE=50%
 
 case "$1" in
   resize)
@@ -18,32 +22,34 @@ case "$1" in
       extension="${filename##*.}"
       filename="${filename%.*}"
 
-      convert -sample 200x150 -strip "$file" "${THUMBS_DIR}//${filename}_thumb.png"
-      convert -resize 50% "$file" "${MEDIUM_DIR}//${filename}_medium.${extension}"
+      convert -sample $THUMB_SIZE -strip "$file" "${THUMBS_DIR}//${filename}_thumb.png"
+      convert -resize $MEDIUM_SIZE "$file" "${MEDIUM_DIR}//${filename}_medium.${extension}"
     done
     ;;
   html)
-    for file in ${PHOTOS_DIR}/*.jpg
-    do
-      name=${file##*/}
+    # images=$(
+      for file in ${PHOTOS_DIR}/*.jpg
+        do
+          name=${file##*/}
 
-      filename=$(basename "$file")
-      filename="${filename%.*}"
+          filename=$(basename "$file")
+          filename="${filename%.*}"
 
-      thumb_img=${THUMBS_DIR}/${filename}_thumb.png
-      med_img=${MEDIUM_DIR}/${filename}_medium.jpg
+          thumb_img=${THUMBS_DIR}/${filename}_thumb.png
+          med_img=${MEDIUM_DIR}/${filename}_medium.jpg
 
-      main_img_dim=`identify -format "%wx%h" "$file"`
-      med_img_dim=`identify -format "%wx%h" "$med_img"`
+          main_img_dim=`identify -format "%wx%h" "$file"`
+          med_img_dim=`identify -format "%wx%h" "$med_img"`
 
-      sed \
-        -e "s~{{ main-img }}~photos/london/$name~g" \
-        -e "s~{{ main-img-size }}~$main_img_dim~g" photo-template.html \
-        -e "s~{{ med-img }}~$med_img~g" photo-template.html \
-        -e "s~{{ med-img-size }}~$med_img_dim~g" photo-template.html \
-        -e "s~{{ img-author }}~$AUTHOR~g" photo-template.html \
-        -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
-    done
-      # sed -e 's~{{ images }}~'"$images"'~g' <gallery-template.html >gallery.html
+          sed \
+            -e "s~{{ main-img }}~photos/london/$name~g" \
+            -e "s~{{ main-img-size }}~$main_img_dim~g"  \
+            -e "s~{{ med-img }}~$med_img~g" \
+            -e "s~{{ med-img-size }}~$med_img_dim~g" \
+            -e "s~{{ img-author }}~$AUTHOR~g" \
+            -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
+        done
+      # )
+      # sed -e 's~{{ images }}~'$images'~g' <gallery-template.html >gallery.html
     ;;
 esac
