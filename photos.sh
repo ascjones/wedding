@@ -1,30 +1,38 @@
 #!/bin/bash
 
-PHOTOS_DIR=photos/london
+SOURCE_DIR=/home/andrew/Pictures/Wedding/London/publish
+PHOTOS_DIR=photos/$2
 AUTHOR=todo
 
 THUMBS_DIR=${PHOTOS_DIR}/thumbs
 MEDIUM_DIR=${PHOTOS_DIR}/medium
 
 THUMB_SIZE=300x200
-MEDIUM_SIZE=50%
+MEDIUM_SIZE=960x540
+FULL_SIZE=1920x1080
 
 case "$1" in
   resize)
     mkdir -p ${THUMBS_DIR}
     mkdir -p ${MEDIUM_DIR}
 
-    for file in ${PHOTOS_DIR}/*.jpg
-    do
-      WIDTH=`identify -format "%w" "$file"`
-      HEIGHT=`identify -format "%h" "$file"`
-      filename=$(basename "$file")
-      extension="${filename##*.}"
-      filename="${filename%.*}"
+    for file in ${SOURCE_DIR}/*.jpg
+      do
+        echo "$file "
+        WIDTH=`identify -format "%w" "$file"`
+        HEIGHT=`identify -format "%h" "$file"`
+        filename=$(basename "$file")
+        extension="${filename##*.}"
+        filename="${filename%.*}"
 
-      convert -sample $THUMB_SIZE -strip "$file" "${THUMBS_DIR}//${filename}_thumb.png"
-      convert -resize $MEDIUM_SIZE "$file" "${MEDIUM_DIR}//${filename}_medium.${extension}"
-    done
+        dest_full="${PHOTOS_DIR}//${filename}.${extension}"
+        dest_med="${MEDIUM_DIR}//${filename}_medium.${extension}"
+        dest_thumb="${THUMBS_DIR}//${filename}_thumb.png"
+
+        convert -resize $FULL_SIZE "$file" "$dest_full"
+        convert -resize $MEDIUM_SIZE "$file"  "$dest_med"
+        convert -sample $THUMB_SIZE -strip "$file" "$dest_thumb"
+      done
     ;;
   html)
     # images=$(
