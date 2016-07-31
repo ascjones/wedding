@@ -1,4 +1,6 @@
-<a href="{{ main-img }}" data-size="{{ main-img-size }}" data-med="{{ med-img }}" data-med-size="{{ med-img-size }}" data-author="{{ img-author }}" class="demo-gallery__img--main">
-  <img src="{{ thumb-img }}" alt="" />
-  <figure></figure>
-</a>
+<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+  <a href="{{ main-img }}" itemprop="contentUrl" data-size="{{ main-img-size }}" data-med="{{ med-img }}" data-med-size="{{ med-img-size }}" data-author="{{ img-author }}" class="demo-gallery__img--main">
+    <img src="{{ thumb-img }}" itemprop="thumbnail" alt="" />
+  </a>
+  <figcaption itemprop="caption description"></figcaption>
+</figure>
