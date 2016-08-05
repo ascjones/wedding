@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SOURCE_DIR=/home/andrew/Pictures/Wedding/London/publish
+SOURCE_DIR=photos/original/CapeTown
 PHOTOS_DIR=photos/$2
 AUTHOR=todo
 
@@ -50,7 +50,7 @@ case "$1" in
           med_img_dim=`identify -format "%wx%h" "$med_img"`
 
           sed \
-            -e "s~{{ main-img }}~photos/london/$name~g" \
+            -e "s~{{ main-img }}~$file~g" \
             -e "s~{{ main-img-size }}~$main_img_dim~g"  \
             -e "s~{{ med-img }}~$med_img~g" \
             -e "s~{{ med-img-size }}~$med_img_dim~g" \
