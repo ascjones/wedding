@@ -1,11 +1,11 @@
 #!/bin/bash
 
 SOURCE_DIR=original/CapeTown
-PHOTOS_DIR=$2
+CITY=$2
 AUTHOR=todo
 
-THUMBS_DIR=${PHOTOS_DIR}/thumbs
-MEDIUM_DIR=${PHOTOS_DIR}/medium
+THUMBS_DIR=thumbs
+MEDIUM_DIR=medium
 
 THUMB_SIZE=300x200
 MEDIUM_SIZE=960x540
@@ -25,7 +25,7 @@ case "$1" in
         extension="${filename##*.}"
         filename="${filename%.*}"
 
-        dest_full="${PHOTOS_DIR}//${filename}.${extension}"
+        dest_full="${CITY}//${filename}.${extension}"
         dest_med="${MEDIUM_DIR}//${filename}_medium.${extension}"
         dest_thumb="${THUMBS_DIR}//${filename}_thumb.png"
 
@@ -36,21 +36,22 @@ case "$1" in
     ;;
   html)
     # images=$(
-      for file in ${PHOTOS_DIR}/*.jpg
+      for file in ${CITY}/*.jpg
         do
           name=${file##*/}
 
           filename=$(basename "$file")
+          extension="${filename##*.}"
           filename="${filename%.*}"
 
           thumb_img=${THUMBS_DIR}/${filename}_thumb.png
           med_img=${MEDIUM_DIR}/${filename}_medium.jpg
 
           main_img_dim=`identify -format "%wx%h" "$file"`
-          med_img_dim=`identify -format "%wx%h" "$med_img"`
+          med_img_dim=`identify -format "%wx%h" "$CITY/$med_img"`
 
           sed \
-            -e "s~{{ main-img }}~$file~g" \
+            -e "s~{{ main-img }}~$filename.$extension~g" \
             -e "s~{{ main-img-size }}~$main_img_dim~g"  \
             -e "s~{{ med-img }}~$med_img~g" \
             -e "s~{{ med-img-size }}~$med_img_dim~g" \
