@@ -3,4 +3,5 @@ capetown.html
 *.orig
 .DS_Store
 bower_components
-/photos
+/photos/**/*.jpg
+/photos/**/*.png

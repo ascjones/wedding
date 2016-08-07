@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SOURCE_DIR=photos/original/CapeTown
-PHOTOS_DIR=photos/$2
+SOURCE_DIR=original/CapeTown
+PHOTOS_DIR=$2
 AUTHOR=todo
 
 THUMBS_DIR=${PHOTOS_DIR}/thumbs
@@ -57,7 +57,5 @@ case "$1" in
             -e "s~{{ img-author }}~$AUTHOR~g" \
             -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
         done
-      # )
-      # sed -e 's~{{ images }}~'$images'~g' <gallery-template.html >gallery.html
     ;;
 esac
