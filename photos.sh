@@ -36,7 +36,7 @@ case "$1" in
       done
     ;;
   html)
-    images=$(
+    photos=$(
       for file in ${CITY}/photos/*.jpg
         do
           name=${file##*/}
@@ -59,5 +59,11 @@ case "$1" in
             -e "s~{{ img-author }}~$AUTHOR~g" \
             -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
         done)
+    # echo $images
+    # sed -e "s~{{ photos }}~${images}~g" gallery-template.html
+    awk -v PHOTOS="$photos" '{
+      sub(/{{ photos }}/, PHOTOS);
+      print;
+    }' gallery-template.html > $CITY/photos/index.html
     ;;
 esac
