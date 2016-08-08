@@ -61,6 +61,7 @@ case "$1" in
         done)
     # echo $images
     # sed -e "s~{{ photos }}~${images}~g" gallery-template.html
+    mkdir -p $CITY/photos
     awk -v PHOTOS="$photos" '{
       sub(/{{ photos }}/, PHOTOS);
       print;
