@@ -36,7 +36,7 @@ case "$1" in
       done
     ;;
   html)
-    # images=$(
+    images=$(
       for file in ${CITY}/photos/*.jpg
         do
           name=${file##*/}
@@ -58,6 +58,6 @@ case "$1" in
             -e "s~{{ med-img-size }}~$med_img_dim~g" \
             -e "s~{{ img-author }}~$AUTHOR~g" \
             -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
-        done
+        done)
     ;;
 esac
