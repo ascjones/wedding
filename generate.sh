@@ -5,7 +5,7 @@ echo CURRENT DIR: $(pwd)
 generate () {
   echo GENERATING $1
   town=$1
-  mkdir $town
+  mkdir -p $town
   dest=$town/index.html
   rm -f $dest
   cp index-template.html $dest
