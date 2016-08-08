@@ -1,5 +1,5 @@
-london.html
-capetown.html
+london/index.html
+capetown/index.html
 *.orig
 .DS_Store
 bower_components
