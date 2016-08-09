@@ -4,13 +4,13 @@ CITY=$2
 PHOTOS_DIR=$CITY/photos
 AUTHOR=todo
 
-THUMB_SIZE=300x200
+THUMB_SIZE=300x300
 MEDIUM_SIZE=960x540
 FULL_SIZE=1920x1080
 
 case "$1" in
   resize)
-    SOURCE_DIR=original/CapeTown
+    SOURCE_DIR=$3
     THUMBS_DIR=$PHOTOS_DIR/thumbs
     MEDIUM_DIR=$PHOTOS_DIR/medium
 
@@ -32,9 +32,9 @@ case "$1" in
 
         convert -resize $FULL_SIZE "$file" "$dest_full"
         convert -resize $MEDIUM_SIZE "$file"  "$dest_med"
-        convert -sample $THUMB_SIZE -strip "$file" "$dest_thumb"
+        convert -define jpeg:size=300x300 "$file" -thumbnail $THUMB_SIZE^ -gravity center -extent $THUMB_SIZE $dest_thumb
       done
-    ;;
+  ;;
   html)
     photos=$(
       for file in ${CITY}/photos/*.jpg
@@ -59,8 +59,6 @@ case "$1" in
             -e "s~{{ img-author }}~$AUTHOR~g" \
             -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
         done)
-    # echo $images
-    # sed -e "s~{{ photos }}~${images}~g" gallery-template.html
     mkdir -p $CITY/photos
     awk -v PHOTOS="$photos" '{
       sub(/{{ photos }}/, PHOTOS);

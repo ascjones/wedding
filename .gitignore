@@ -1,5 +1,6 @@
 london
 capetown
+photos
 *.orig
 .DS_Store
 bower_components
