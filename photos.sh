@@ -36,33 +36,33 @@ case "$1" in
       done
   ;;
   html)
-    photos=$(
-      for file in ${CITY}/photos/*.jpg
-        do
-          name=${file##*/}
+    temp_photos_html=$CITY/photos/photos.html
+    gallery_index=$CITY/photos/index.html
 
-          filename=$(basename "$file")
-          extension="${filename##*.}"
-          filename="${filename%.*}"
+    for file in ${CITY}/photos/*.jpg
+      do
+        name=${file##*/}
 
-          thumb_img=thumbs/${filename}_thumb.png
-          med_img=medium/${filename}_medium.jpg
+        filename=$(basename "$file")
+        extension="${filename##*.}"
+        filename="${filename%.*}"
 
-          main_img_dim=`identify -format "%wx%h" "$file"`
-          med_img_dim=`identify -format "%wx%h" "$PHOTOS_DIR/$med_img"`
+        thumb_img=thumbs/${filename}_thumb.png
+        med_img=medium/${filename}_medium.jpg
 
-          sed \
-            -e "s~{{ main-img }}~$filename.$extension~g" \
-            -e "s~{{ main-img-size }}~$main_img_dim~g"  \
-            -e "s~{{ med-img }}~$med_img~g" \
-            -e "s~{{ med-img-size }}~$med_img_dim~g" \
-            -e "s~{{ img-author }}~$AUTHOR~g" \
-            -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
-        done)
-    mkdir -p $CITY/photos
-    awk -v PHOTOS="$photos" '{
-      sub(/{{ photos }}/, PHOTOS);
-      print;
-    }' gallery-template.html > $CITY/photos/index.html
+        main_img_dim=`identify -format "%wx%h" "$file"`
+        med_img_dim=`identify -format "%wx%h" "$PHOTOS_DIR/$med_img"`
+
+        sed \
+          -e "s~{{ main-img }}~$filename.$extension~g" \
+          -e "s~{{ main-img-size }}~$main_img_dim~g"  \
+          -e "s~{{ med-img }}~$med_img~g" \
+          -e "s~{{ med-img-size }}~$med_img_dim~g" \
+          -e "s~{{ img-author }}~$AUTHOR~g" \
+          -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
+    done > $temp_photos_html
+    sed -e "/{{ photos }}/{ r $temp_photos_html" -e "d}" gallery-template.html > $gallery_index
+    rm $temp_photos_html
+    echo "Generated gallery $gallery_index"
     ;;
 esac

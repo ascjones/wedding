@@ -6,3 +6,4 @@ photos
 bower_components
 /*/photos/**/*.jpg
 /*/photos/**/*.png
+*.bak
