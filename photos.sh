@@ -4,7 +4,7 @@ CITY=$2
 PHOTOS_DIR=$CITY/photos
 AUTHOR=todo
 
-THUMB_SIZE=300x300
+THUMB_SIZE=450x450
 MEDIUM_SIZE=960x540
 FULL_SIZE=1920x1080
 
@@ -70,7 +70,7 @@ case "$1" in
           -e "s~{{ img-author }}~$AUTHOR~g" \
           -e "s~{{ thumb-img }}~$thumb_img~g" \
           -e "s~{{ thumb-class }}~$thumb_class~g" photo-template.html
-          
+
     done > $temp_photos_html
     sed -e "/{{ photos }}/{ r $temp_photos_html" -e "d}" gallery-template.html > $gallery_index
     rm $temp_photos_html
