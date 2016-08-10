@@ -20,8 +20,6 @@ case "$1" in
     for file in ${SOURCE_DIR}/*.jpg
       do
         echo "$file "
-        WIDTH=`identify -format "%w" "$file"`
-        HEIGHT=`identify -format "%h" "$file"`
         filename=$(basename "$file")
         extension="${filename##*.}"
         filename="${filename%.*}"
@@ -32,7 +30,8 @@ case "$1" in
 
         convert -resize $FULL_SIZE "$file" "$dest_full"
         convert -resize $MEDIUM_SIZE "$file"  "$dest_med"
-        convert -define jpeg:size=300x300 "$file" -thumbnail $THUMB_SIZE^ -gravity center -extent $THUMB_SIZE $dest_thumb
+        convert -resize $THUMB_SIZE "$file"  "$dest_thumb"
+        # convert -define jpeg:size=300x300 "$file" -thumbnail $THUMB_SIZE^ -gravity center -extent $THUMB_SIZE $dest_thumb
       done
   ;;
   html)
@@ -53,16 +52,28 @@ case "$1" in
         main_img_dim=`identify -format "%wx%h" "$file"`
         med_img_dim=`identify -format "%wx%h" "$PHOTOS_DIR/$med_img"`
 
+        thumb_width=`identify -format "%w" "$file"`
+        thumb_height=`identify -format "%h" "$file"`
+
+        if (( $thumb_width < $thumb_height ))
+        then
+          thumb_class="portrait"
+        else
+          thumb_class="landscape"
+        fi
+
         sed \
           -e "s~{{ main-img }}~$filename.$extension~g" \
           -e "s~{{ main-img-size }}~$main_img_dim~g"  \
           -e "s~{{ med-img }}~$med_img~g" \
           -e "s~{{ med-img-size }}~$med_img_dim~g" \
           -e "s~{{ img-author }}~$AUTHOR~g" \
-          -e "s~{{ thumb-img }}~$thumb_img~g" photo-template.html
+          -e "s~{{ thumb-img }}~$thumb_img~g" \
+          -e "s~{{ thumb-class }}~$thumb_class~g" photo-template.html
+          
     done > $temp_photos_html
     sed -e "/{{ photos }}/{ r $temp_photos_html" -e "d}" gallery-template.html > $gallery_index
     rm $temp_photos_html
     echo "Generated gallery $gallery_index"
-    ;;
+  ;;
 esac
