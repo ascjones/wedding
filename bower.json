@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "photoswipe": "~4.1.1"
+    "photoswipe": "~4.1.1",
+    "bootstrap": "~3.3.7",
   }
 }
