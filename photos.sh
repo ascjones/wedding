@@ -77,8 +77,7 @@ case "$1" in
 
     # replace other vars
     while IFS="=" read key value; do
-      echo $key $value
-        sed -i.bak -e "s~{{ $key }}~$value~g" $gallery_index
+      sed -i.bak -e "s~{{ $key }}~$value~g" $gallery_index
       rm $gallery_index.bak
     done < vars-$CITY
 

@@ -1,11 +1,68 @@
 body {
-  width: 935px;
-  margin: 30px auto;
-  font-family: sans-serif;
+  padding:0;
+  margin:0;
+	font-family: 'Arvo', serif;
 	background-color: #f7f7f7;
 }
 
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Oswald', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#nav-container {
+  /*margin=0;
+  padding=0;
+  width=100%;
+  height=200px;
+  top:0;
+  left:0;*/
+  /*height: 50px;*/
+  padding: 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+#nav-content {
+  margin: 0 auto;
+  width: 935px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#nav-header h1 {
+  font-family: 'Pacifico', cursive;
+  padding: 0;
+  margin: 0;
+}
+
+#nav-other-town {
+  font-family: 'Oswald', serif;
+  font-weight: bold;
+  padding: 0;
+  margin-top: 10px;
+}
+
+#header-content {
+  margin: 0 auto;
+  width: 935px;
+}
+
+#gallery-title {
+  text-align: center;
+  color: #18A7B5;
+}
+
 .wedding-gallery {
+  width: 935px;
+  margin: 30px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between; /* or space-around */
@@ -66,4 +123,16 @@ img {
 .thumbnail img.portrait {
   width: 100%;
   height: auto;
+}
+
+footer {
+  width: 100%;
+  bottom:0;
+  left:0;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #ffffff;
+  border-top: 1px solid #dbdbdb;
+  margin: 0 auto;
 }

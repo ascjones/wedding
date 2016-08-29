@@ -6,7 +6,11 @@
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta name="description" content="">
 	<meta name="author" content="www.dethemes.com">
-	<title>ANDREW &amp; MICHELLE</title>
+	<title>Michelle &amp; Andrew</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="../../css/main.css" />
 
@@ -29,12 +33,40 @@
 
 <body>
 
-<div class="wedding-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-{{ photos }}
-</div>
+<nav>
+	<div id="nav-container">
+		<div id="nav-content">
+			<div id="nav-header">
+				<h1>Michelle & Andrew / Wedding</h1>
+			</div>
+			<div id="nav-other-town">
+				<a href="
+					{{ other-town-link }}
+				">
+					{{ other-town-text }}
+				</a>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<header>
+	<div id="header-content">
+		<h1 id="gallery-title">
+			{{ header-text }}
+		</h1>
+	</div>
+</header>
+
+<main>
+	<div class="wedding-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+	{{ photos }}
+	</div>
+</main>
 
 <footer>
-	<div class="copyright">&copy;
+	<div class="copyright">
+		Photos &copy;
 		<a href="
 			{{ copyright-link }}
 			">
