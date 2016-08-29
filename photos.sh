@@ -17,7 +17,7 @@ case "$1" in
     mkdir -p ${THUMBS_DIR}
     mkdir -p ${MEDIUM_DIR}
 
-    for file in ${SOURCE_DIR}/*.jpg
+    for file in ${SOURCE_DIR}/*.*
       do
         echo "$file "
         filename=$(basename "$file")
@@ -38,7 +38,7 @@ case "$1" in
     temp_photos_html=$CITY/photos/photos.html
     gallery_index=$CITY/photos/index.html
 
-    for file in ${CITY}/photos/*.jpg
+    for file in ${CITY}/photos/*.JPG
       do
         name=${file##*/}
 
@@ -47,7 +47,7 @@ case "$1" in
         filename="${filename%.*}"
 
         thumb_img=thumbs/${filename}_thumb.png
-        med_img=medium/${filename}_medium.jpg
+        med_img=medium/${filename}_medium.JPG
 
         main_img_dim=`identify -format "%wx%h" "$file"`
         med_img_dim=`identify -format "%wx%h" "$PHOTOS_DIR/$med_img"`
