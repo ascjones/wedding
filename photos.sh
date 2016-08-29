@@ -38,16 +38,16 @@ case "$1" in
     temp_photos_html=$CITY/photos/photos.html
     gallery_index=$CITY/photos/index.html
 
-    for file in ${CITY}/photos/*.JPG
+    for file in ${CITY}/photos/*.jpg
       do
         name=${file##*/}
 
         filename=$(basename "$file")
         extension="${filename##*.}"
-        filename="${filename%.*}"
+      filename="${filename%.*}"
 
         thumb_img=thumbs/${filename}_thumb.png
-        med_img=medium/${filename}_medium.JPG
+        med_img=medium/${filename}_medium.jpg
 
         main_img_dim=`identify -format "%wx%h" "$file"`
         med_img_dim=`identify -format "%wx%h" "$PHOTOS_DIR/$med_img"`
