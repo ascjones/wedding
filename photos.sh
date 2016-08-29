@@ -74,6 +74,14 @@ case "$1" in
     done > $temp_photos_html
     sed -e "/{{ photos }}/{ r $temp_photos_html" -e "d}" gallery-template.html > $gallery_index
     rm $temp_photos_html
+
+    # replace other vars
+    while IFS="=" read key value; do
+      echo $key $value
+        sed -i.bak -e "s~{{ $key }}~$value~g" $gallery_index
+      rm $gallery_index.bak
+    done < vars-$CITY
+
     echo "Generated gallery $gallery_index"
   ;;
 esac

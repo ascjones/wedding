@@ -33,8 +33,15 @@
 {{ photos }}
 </div>
 
-<footer><div class="copyright">&copy; <a href="http://www.cherylmcewan.co.za/">Cheryl McEwan Photography</a></div></footer>
-
+<footer>
+	<div class="copyright">&copy;
+		<a href="
+			{{ copyright-link }}
+			">
+			{{ copyright-name }}
+		</a>
+	</div>
+</footer>
 
 	<!-- Root element of PhotoSwipe. Must have class pswp. -->
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
